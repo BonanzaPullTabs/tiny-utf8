@@ -2372,12 +2372,13 @@ namespace tiny_utf8
 		 */
 		template<size_type LITLEN>
 		bool starts_with( const value_type (&str)[LITLEN] ) const noexcept {
+			const value_type* strptr = &str[0];
 			size_type		str_len = str[LITLEN-1] ? LITLEN : LITLEN-1;
 			const_iterator	it = cbegin(), end = cend();
 			while( it != end && str_len ){
-				if( *it != *str )
+				if( *it != *strptr )
 					return false;
-				++it, ++str, --str_len;
+				++it, ++strptr, --str_len;
 			}
 			return !str_len;
 		}
